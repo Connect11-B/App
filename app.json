@@ -23,8 +23,6 @@
     "web": {
       "favicon": "./assets/images/logo-nobg.png"
     },
-    "plugins": [
-      "expo-secure-store"
-    ]
+    "plugins": ["expo-secure-store"]
   }
 }

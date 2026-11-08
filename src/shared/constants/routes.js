@@ -1,5 +1,7 @@
 export const ROUTES = {
-  Launching: "launching",
+  Launching: "Launching",
   Login: "Login",
   Signup: "Signup",
+  Main: "Main",
+  Home: "Home",
 };

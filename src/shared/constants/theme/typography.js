@@ -92,12 +92,12 @@ export const TYPOGRAPHY = {
     lineHeight: LINE_HEIGHT.sm,
   },
   caption: {
-    fontSize: FONT_SIZE.xs,
+    fontSize: FONT_SIZE.xxs,
     fontWeight: FONT_WEIGHT.regular,
     lineHeight: LINE_HEIGHT.xs,
   },
   captionBold: {
-    fontSize: FONT_SIZE.xs,
+    fontSize: FONT_SIZE.xxs,
     fontWeight: FONT_WEIGHT.semiBold,
     lineHeight: LINE_HEIGHT.xs,
   },

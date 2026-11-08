@@ -82,12 +82,13 @@ export const PALETTE = {
   border: GRAY[200],
   borderLight: GRAY[100],
   borderDark: GRAY[300],
-  borderFocus: BRAND[500],
   divider: GRAY[100],
 
   // 입력 요소
   placeholder: GRAY[400],
   disabled: GRAY[100],
+  focused: BRAND[500],
+  typed: BRAND[600],
 
   // 기타 공통
   ...COMMON,
