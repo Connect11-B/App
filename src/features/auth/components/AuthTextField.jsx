@@ -29,13 +29,14 @@ export const AuthTextField = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
-  const currentColor = isFocused
-    ? PALETTE.focused
-    : error
+  const currentColor =
+    value && error
       ? COLORS.semantic.error
-      : value
-        ? PALETTE.typed
-        : PALETTE.gray[500];
+      : value && isFocused
+        ? PALETTE.focused
+        : value
+          ? PALETTE.typed
+          : PALETTE.gray[500];
 
   return (
     <View style={[styles.wrapper, containerStyle]}>
@@ -59,6 +60,7 @@ export const AuthTextField = ({
           value={value}
           onChangeText={onChangeText}
           onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
           placeholderTextColor={PALETTE.placeholder}
           keyboardType={keyboardType}
@@ -68,7 +70,9 @@ export const AuthTextField = ({
           {...restProps}
         />
       </View>
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+      <View style={styles.error_container}>
+        {error ? <Text style={styles.errorText}>{error}</Text> : null}
+      </View>
     </View>
   );
 };
@@ -78,6 +82,7 @@ const styles = StyleSheet.create({
     width: "100%",
     maxWidth: 400,
     marginBottom: LAYOUT.spacing.md,
+    position: "relative",
   },
   label: {
     fontSize: FONT_SIZE.sm,
@@ -97,8 +102,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 2,
   },
   errorText: {
+    position: "absolute",
     color: SEMANTIC.error,
-    fontSize: FONT_SIZE.xs,
-    marginTop: 4,
+    fontSize: FONT_SIZE.sm,
+    marginTop: 2,
   },
 });
