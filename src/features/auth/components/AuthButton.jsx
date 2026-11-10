@@ -1,4 +1,4 @@
-import { COLORS, THEME } from "@shared/constants/theme";
+import { COLORS, FONT_WEIGHT, THEME } from "@shared/constants/theme";
 import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
 
 /**
@@ -12,9 +12,9 @@ import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
  */
 export const AuthButton = ({ boxStyle, label, textStyle, onClick, loading }) => {
   return (
-    <Pressable onPress={onClick} style={[styles.container, boxStyle, THEME.shadows.lg]}>
+    <Pressable onPress={onClick} style={[styles.container, boxStyle]}>
       {loading ? (
-        <ActivityIndicator color={COLORS.palette.textInverse} size={24}></ActivityIndicator>
+        <ActivityIndicator color={COLORS.palette.textInverse} size={24} />
       ) : (
         <Text style={[THEME.typography.button, textStyle, styles.label]}>{label}</Text>
       )}
@@ -30,9 +30,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: THEME.colors.brand[500],
     borderRadius: THEME.radius.md,
+    overflow: "hidden",
+    boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.25)",
   },
   label: {
     color: "white",
-    fontWeight: "regular",
+    fontWeight: FONT_WEIGHT.regular,
   },
 });
