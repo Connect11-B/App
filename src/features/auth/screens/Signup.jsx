@@ -23,7 +23,7 @@ export function Signup() {
 
   const [email, setEmail] = useState(""); // 이메일
   const [password, setPassword] = useState(""); // 비밀번호
-  const [grade, setGrade] = useState(null); // 학번
+  const [grade, setGrade] = useState(""); // 학번
   const [error, setError] = useState(null);
 
   const [isVerified, setIsVerified] = useState(false); // 이메일 인증
@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   scroll_container: {
+    flexGrow: 1,
     paddingTop: 40,
     paddingHorizontal: 60,
     gap: 20,
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   confirm_container: {
-    flex: 1,
+    flex: 0.5,
     justifyContent: "center",
     alignItems: "center",
     gap: 4,

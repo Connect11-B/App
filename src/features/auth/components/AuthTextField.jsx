@@ -1,6 +1,6 @@
 import { COLORS, FONT_SIZE, LAYOUT, PALETTE, SEMANTIC } from "@shared/constants/theme";
-import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Animated, StyleSheet, Text, TextInput, View } from "react-native";
 
 /**
  *
@@ -27,6 +27,7 @@ export const AuthTextField = ({
   editable = true,
   ...restProps
 }) => {
+  const progress = useRef(new Animated.Value(value.length > 0 ? 1 : 0)).current;
   const [isFocused, setIsFocused] = useState(false);
 
   const currentColor =
@@ -36,11 +37,47 @@ export const AuthTextField = ({
         ? PALETTE.focused
         : value
           ? PALETTE.typed
-          : PALETTE.gray[500];
+          : PALETTE.gray[400];
+
+  const labelStyle = {
+    transform: [
+      {
+        translateY: progress.interpolate({
+          inputRange: [0, 1],
+          outputRange: [15, -15],
+        }),
+      },
+      {
+        translateX: progress.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -1],
+        }),
+      },
+    ],
+    fontSize: progress.interpolate({
+      inputRange: [0, 1],
+      outputRange: [16, 14.8],
+    }),
+  };
+
+  useEffect(() => {
+    const animation = Animated.timing(progress, {
+      toValue: isFocused || value.length > 0 ? 1 : 0,
+      duration: 180,
+      useNativeDriver: false,
+    });
+
+    animation.start();
+    return () => animation.stop();
+  }, [isFocused, value, progress]);
 
   return (
     <View style={[styles.wrapper, containerStyle]}>
-      {label ? <Text style={[styles.label, { color: currentColor }]}>{label}</Text> : null}
+      {label ? (
+        <Animated.Text style={[styles.label, { color: currentColor }, labelStyle]}>
+          {label}
+        </Animated.Text>
+      ) : null}
       <View
         style={[
           styles.inputContainer,
@@ -61,12 +98,13 @@ export const AuthTextField = ({
           onChangeText={onChangeText}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholder={placeholder}
+          placeholder={label && !isFocused ? "" : placeholder}
           placeholderTextColor={PALETTE.placeholder}
           keyboardType={keyboardType}
           autoCapitalize="none"
           autoCorrect={false}
           editable={editable}
+          accessibilityLabel={label}
           {...restProps}
         />
       </View>
@@ -85,9 +123,11 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   label: {
+    position: "absolute",
     fontSize: FONT_SIZE.sm,
     fontWeight: "600",
-    paddingHorizontal: 6,
+    paddingHorizontal: 4,
+    pointerEvents: "none",
   },
   inputContainer: {
     flexDirection: "row",
@@ -98,8 +138,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: LAYOUT.inputHeight,
     fontSize: FONT_SIZE.md,
-    paddingVertical: 8,
-    paddingHorizontal: 2,
   },
   errorText: {
     position: "absolute",
