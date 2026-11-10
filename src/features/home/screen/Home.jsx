@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export function Home() {
   return (
-    <View style={styles.container}>
-      <Text>로그인 성공</Text>
-    </View>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <Text>로그인 성공</Text>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -13,5 +16,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: "center",
     justifyContent: "center",
+    fontSize: 24,
   },
 });

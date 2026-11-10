@@ -88,7 +88,7 @@ export const PALETTE = {
   placeholder: GRAY[400],
   disabled: GRAY[100],
   focused: BRAND[500],
-  typed: BRAND[600],
+  typed: BRAND[700],
 
   // 기타 공통
   ...COMMON,

@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { ROUTES } from "@shared/constants/routes";
 import { FONT_WEIGHT, PALETTE, TYPOGRAPHY } from "@shared/constants/theme";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Image,
   Keyboard,
@@ -19,6 +19,8 @@ import { AuthButton } from "../components/AuthButton";
 import { AuthTextField } from "../components/AuthTextField";
 
 export function Login() {
+  const ref = React.useRef(null);
+
   const navigation = useNavigation();
 
   const [email, setEmail] = useState(""); // 이메일
@@ -103,7 +105,6 @@ const styles = StyleSheet.create({
   textAreaContainer: {
     flex: 1,
     width: "100%",
-    // gap: 20,
     alignItems: "center",
     paddingVertical: 75,
   },
