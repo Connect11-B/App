@@ -10,9 +10,20 @@ import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
  * @param {style} [boxStyle] - 추가적인 버튼 스타일
  * @param {style} [textStyle] - 추가적인 텍스트 스타일
  */
-export const AuthButton = ({ boxStyle, label, textStyle, onClick, loading }) => {
+export const AuthButton = ({ boxStyle, label, textStyle, onClick, loading, disabled }) => {
   return (
-    <Pressable onPress={onClick} style={[styles.container, boxStyle]}>
+    <Pressable
+      onPress={onClick}
+      style={[
+        styles.container,
+        boxStyle,
+        disabled && {
+          boxShadow: "none",
+          opacity: 0.7,
+        },
+      ]}
+      disabled={disabled}
+    >
       {loading ? (
         <ActivityIndicator color={COLORS.palette.textInverse} size={24} />
       ) : (
@@ -28,13 +39,14 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: THEME.colors.brand[500],
     borderRadius: THEME.radius.md,
     overflow: "hidden",
+    backgroundColor: COLORS.palette.primary,
     boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.25)",
+    opacity: 1,
   },
   label: {
+    fontWeight: FONT_WEIGHT.bold,
     color: "white",
-    fontWeight: FONT_WEIGHT.regular,
   },
 });
