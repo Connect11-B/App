@@ -1,6 +1,7 @@
+import { Ionicons } from "@expo/vector-icons";
 import { COLORS, FONT_SIZE, LAYOUT, PALETTE, SEMANTIC } from "@shared/constants/theme";
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, StyleSheet, Text, TextInput, View } from "react-native";
+import { Animated, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 /**
  *
@@ -13,6 +14,7 @@ import { Animated, StyleSheet, Text, TextInput, View } from "react-native";
  * @param {style} containerStyle
  * @param {style} inputStyle
  * @param {boolean} editable
+ * @param {boolean} secureTextEntry
  * @param {object} restProps
  */
 export const AuthTextField = ({
@@ -25,10 +27,12 @@ export const AuthTextField = ({
   containerStyle,
   inputStyle,
   editable = true,
+  secureTextEntry = false,
   ...restProps
 }) => {
   const progress = useRef(new Animated.Value(value.length > 0 ? 1 : 0)).current;
   const [isFocused, setIsFocused] = useState(false);
+  const [isOpen, setIsOpen] = useState(secureTextEntry);
 
   const currentColor =
     value && error
@@ -105,8 +109,18 @@ export const AuthTextField = ({
           autoCorrect={false}
           editable={editable}
           accessibilityLabel={label}
+          secureTextEntry={isOpen}
           {...restProps}
         />
+        {secureTextEntry ? (
+          <Pressable onPress={() => setIsOpen(!isOpen)}>
+            <Ionicons
+              name={isOpen ? "eye-off-outline" : "eye"}
+              size={24}
+              color={COLORS.palette.textTertiary}
+            />
+          </Pressable>
+        ) : null}
       </View>
       <View style={styles.error_container}>
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
