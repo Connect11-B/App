@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { ROUTES } from "@shared/constants/routes";
-import { FONT_WEIGHT, PALETTE, TYPOGRAPHY } from "@shared/constants/theme";
+import { PALETTE, TYPOGRAPHY } from "@shared/constants/theme";
 import React, { useState } from "react";
 import {
   Image,
@@ -9,7 +9,6 @@ import {
   Platform,
   Pressable,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -17,10 +16,9 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthButton } from "../components/AuthButton";
 import { AuthTextField } from "../components/AuthTextField";
+import { styles } from "./style";
 
 export function Login() {
-  const ref = React.useRef(null);
-
   const navigation = useNavigation();
 
   const [email, setEmail] = useState(""); // 이메일
@@ -41,7 +39,10 @@ export function Login() {
 
   const handleSubmit = () => {
     setLoading(true);
-    if (isValid) return navigation.navigate(ROUTES.Home);
+    if (isValid) {
+      setLoading(false);
+      return navigation.navigate(ROUTES.Home);
+    }
   };
 
   return (
@@ -71,11 +72,17 @@ export function Login() {
                 value={password}
                 onChangeText={setPassword}
                 error={error}
+                secureTextEntry
               />
             </View>
             <View style={styles.confirm_container}>
               <View style={styles.button_container}>
-                <AuthButton label="로그인" onClick={handleSubmit} loading={loading} />
+                <AuthButton
+                  label="로그인"
+                  onClick={handleSubmit}
+                  loading={loading}
+                  disabled={!isValid}
+                />
               </View>
               <TouchableOpacity>
                 <Text style={[TYPOGRAPHY.caption, { color: PALETTE.textSecondary }]}>
@@ -95,63 +102,3 @@ export function Login() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "100%",
-    backgroundColor: "white",
-  },
-  textAreaContainer: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
-    paddingVertical: 75,
-  },
-  logo_container: {
-    flex: 0.25,
-    justifyContent: "flex-end",
-    marginBottom: 15,
-  },
-  logo: {
-    width: 210,
-    height: 100,
-    resizeMode: "contain",
-  },
-  scroll_container: {
-    flexGrow: 1,
-    paddingTop: 40,
-    paddingHorizontal: 60,
-    gap: 20,
-  },
-  form_container: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
-    maxWidth: 400,
-    paddingHorizontal: 15,
-    gap: 20,
-  },
-  confirm_container: {
-    flex: 1,
-    justifySelf: "center",
-    alignItems: "center",
-    gap: 4,
-  },
-  button_container: {
-    width: "100%",
-    height: 44,
-  },
-  navigator_container: {
-    flexDirection: "row",
-    gap: 10,
-  },
-  caption: {
-    fontWeight: FONT_WEIGHT.semiBold,
-    color: PALETTE.textBrand,
-  },
-  nav_text: {
-    fontWeight: FONT_WEIGHT.semiBold,
-    color: PALETTE.brand[800],
-  },
-});

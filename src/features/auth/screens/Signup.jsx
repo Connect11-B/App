@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { ROUTES } from "@shared/constants/routes";
-import { FONT_WEIGHT, PALETTE, THEME, TYPOGRAPHY } from "@shared/constants/theme";
+import { THEME, TYPOGRAPHY } from "@shared/constants/theme";
 import { useState } from "react";
 import {
   Image,
@@ -9,7 +9,6 @@ import {
   Platform,
   Pressable,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -17,6 +16,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthButton } from "../components/AuthButton";
 import { AuthTextField } from "../components/AuthTextField";
+import { styles } from "./style";
 
 export function Signup() {
   const navigation = useNavigation();
@@ -101,63 +101,3 @@ export function Signup() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "100%",
-    backgroundColor: "white",
-  },
-  textAreaContainer: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
-    paddingVertical: 75,
-  },
-  logo_container: {
-    flex: 0.25,
-    justifyContent: "flex-end",
-    marginBottom: 15,
-  },
-  logo: {
-    width: 210,
-    height: 100,
-    resizeMode: "contain",
-  },
-  scroll_container: {
-    flexGrow: 1,
-    paddingTop: 40,
-    paddingHorizontal: 60,
-    gap: 20,
-  },
-  form_container: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
-    maxWidth: 400,
-    paddingHorizontal: 15,
-    gap: 20,
-  },
-  confirm_container: {
-    flex: 0.5,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 4,
-  },
-  button_container: {
-    width: "100%",
-    height: 44,
-  },
-  navigator_container: {
-    flexDirection: "row",
-    gap: 10,
-  },
-  caption: {
-    fontWeight: FONT_WEIGHT.semiBold,
-    color: PALETTE.textBrand,
-  },
-  nav_text: {
-    fontWeight: FONT_WEIGHT.semiBold,
-    color: PALETTE.primaryDark,
-  },
-});
