@@ -18,12 +18,12 @@ import { AuthButton } from "../components/AuthButton";
 import { AuthTextField } from "../components/AuthTextField";
 import { styles } from "./style";
 
-export function Login() {
+export function LoginScreen() {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState(""); // 이메일
   const [password, setPassword] = useState(""); // 비밀번호
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -39,10 +39,16 @@ export function Login() {
 
   const handleSubmit = () => {
     setLoading(true);
-    if (isValid) {
+    setError("");
+    // TODO: 로그인 API 호출
+    try {
+    } catch {
+    } finally {
       setLoading(false);
-      return navigation.navigate(ROUTES.Home);
     }
+    if (isValid) {
+      return navigation.navigate(ROUTES.Home);
+    } else setError("이메일과 비밀번호를 다시 확인해주세요");
   };
 
   return (
@@ -64,7 +70,7 @@ export function Login() {
                 label="이메일"
                 value={email}
                 onChangeText={setEmail}
-                error={emailError}
+                error={emailError || error}
               />
 
               <AuthTextField

@@ -18,7 +18,7 @@ import { AuthButton } from "../components/AuthButton";
 import { AuthTextField } from "../components/AuthTextField";
 import { styles } from "./style";
 
-export function Signup() {
+export function SignupScreen() {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState(""); // 이메일
@@ -61,13 +61,16 @@ export function Signup() {
             style={{ flex: 1, width: "100%" }}
             contentContainerStyle={styles.scroll_container}
           >
-            <View style={styles.form_container}>
-              <AuthTextField
-                label="이메일"
-                value={email}
-                onChangeText={setEmail}
-                error={emailError}
-              />
+            <View style={[styles.form_container]}>
+              <View>
+                <AuthTextField
+                  label="이메일"
+                  value={email}
+                  onChangeText={setEmail}
+                  error={emailError}
+                />
+                <AuthButton  />
+              </View>
 
               <AuthTextField
                 label="비밀번호"

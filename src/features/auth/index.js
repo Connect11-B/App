@@ -1,2 +1,2 @@
-export { Login } from "./screens/Login";
-export { Signup } from "./screens/Signup";
+export { LoginScreen } from "./screens/Login";
+export { SignupScreen } from "./screens/Signup";
