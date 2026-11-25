@@ -19,5 +19,5 @@ apiHandler.interceptors.request.use(async config => {
 
 apiHandler.interceptors.response.use(
   response => response,
-  async error => {}
+  async error => Promise.reject(error)
 );
