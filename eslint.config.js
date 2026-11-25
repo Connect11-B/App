@@ -7,6 +7,14 @@ module.exports = defineConfig([
   expoConfig,
   eslintPluginPrettierRecommended,
   {
+    // eslint의 jsconfig.json 파일 읽기
+    settings: {
+      "import/resolver": {
+        typescript: {
+          project: "./jsconfig.json",
+        },
+      },
+    },
     ignores: ["dist/*", ".expo/*", "node_modules/*", "android/*", "ios/*", ".git/*"],
   },
 ]);

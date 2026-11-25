@@ -8,8 +8,13 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@app/*": ["src/app/*"],
+      "@features/*": ["src/features/*"],
+      "@navigation/*": ["src/navigation/*"],
+      "@shared/*": ["src/shared/*"],
+      "@assets/*": ["assets/*"]
     }
   },
+  "include": ["**/*.js", "**/*.jsx"],
   "exclude": ["node_modules", "dist", ".expo", "ios", "android"]
 }
