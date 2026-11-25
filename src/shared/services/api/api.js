@@ -12,7 +12,7 @@ const apiHandler = axios.create({
 apiHandler.interceptors.request.use(async config => {
   const token = await TokenStorage.getAccessToken();
   if (token) {
-    config.headers.Authorization(`Bearer ${token}`);
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
