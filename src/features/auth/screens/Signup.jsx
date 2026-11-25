@@ -65,9 +65,10 @@ export function SignupScreen() {
     else if (password.length < 8) setMessage("비밀번호는 8자 이상 입력해 주세요.");
     else if (!/^\d+$/.test(studentId)) setMessage("학번은 숫자로 입력해 주세요.");
     else if (!showVerificationPreview) setMessage("회원가입하려면 이메일 인증이 필요해요.");
-
-    // TODO: 회원가입 API 를 통한 처리
-    navigation.replace(ROUTES.Login);
+    else {
+      // TODO: 회원가입 API를 통한 처리
+      navigation.replace(ROUTES.Login);
+    }
   }
 
   return (
