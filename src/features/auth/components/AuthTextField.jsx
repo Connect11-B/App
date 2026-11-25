@@ -1,7 +1,15 @@
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS, FONT_SIZE, LAYOUT, PALETTE, SEMANTIC } from "@shared/constants/theme";
-import React, { useEffect, useRef, useState } from "react";
-import { Animated, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Animated,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  useAnimatedValue,
+  View,
+} from "react-native";
 
 /**
  *
@@ -30,7 +38,7 @@ export const AuthTextField = ({
   secureTextEntry = false,
   ...restProps
 }) => {
-  const progress = useRef(new Animated.Value(value.length > 0 ? 1 : 0)).current;
+  const progress = useAnimatedValue(value.length > 0 ? 1 : 0);
   const [isFocused, setIsFocused] = useState(false);
   const [isOpen, setIsOpen] = useState(secureTextEntry);
 
