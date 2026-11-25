@@ -13,6 +13,8 @@ import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
 export const AuthButton = ({ boxStyle, label, textStyle, onClick, loading, disabled }) => {
   return (
     <Pressable
+      accessibilityRole="button"
+      accessibilityState={{ disabled, busy: loading }}
       onPress={onClick}
       style={[
         styles.container,

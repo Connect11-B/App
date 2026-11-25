@@ -11,7 +11,7 @@ import { Animated, Pressable, StyleSheet, Text, TextInput, View } from "react-na
  * @param {string} placeholder
  * @param {string | boolean} error
  * @param {string} keyboardType
- * @param {style} containerStyle
+ * @param {style} boxStyle
  * @param {style} inputStyle
  * @param {boolean} editable
  * @param {boolean} secureTextEntry
@@ -24,7 +24,7 @@ export const AuthTextField = ({
   placeholder = "",
   error,
   keyboardType = "default",
-  containerStyle,
+  boxStyle,
   inputStyle,
   editable = true,
   secureTextEntry = false,
@@ -76,7 +76,7 @@ export const AuthTextField = ({
   }, [isFocused, value, progress]);
 
   return (
-    <View style={[styles.wrapper, containerStyle]}>
+    <View style={[styles.wrapper, boxStyle]}>
       {label ? (
         <Animated.Text style={[styles.label, { color: currentColor }, labelStyle]}>
           {label}
